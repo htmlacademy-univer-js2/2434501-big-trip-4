@@ -1,6 +1,16 @@
-import { createElement } from '../render';
+import { createElement } from '../render.js';
 
-function createEventEditingFormTemplate() {
+function createEventEditingFormTemplate(point) {
+  const {
+    // basePrice,
+    // dateFrom,
+    // dateTo,
+    // // destination,
+    // // offers,
+    // isFavorite,
+    type
+  } = point;
+
   return `<li class="trip-events__item">
   <form class="event event--edit" action="#" method="post">
     <header class="event__header">
@@ -65,9 +75,9 @@ function createEventEditingFormTemplate() {
 
       <div class="event__field-group  event__field-group--destination">
         <label class="event__label  event__type-output" for="event-destination-1">
-          Flight
+          ${type}
         </label>
-        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="Chamonix" list="destination-list-1">
+        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value=${'destination'} list="destination-list-1">
         <datalist id="destination-list-1">
           <option value="Amsterdam"></option>
           <option value="Geneva"></option>
@@ -158,9 +168,24 @@ function createEventEditingFormTemplate() {
 </li>`;
 }
 
+const EMPTY_FORM_POINT = {
+  id: crypto.randomUUID(),
+  basePrice: 0,
+  dateFrom: 'Дата начала',
+  dateTo: 'Дата завершения',
+  destination: 'Пункт назначения',
+  isFavorite: false,
+  offers: null,
+  type: 'Flight'
+};
+
 export default class EventEditingFormView {
+  constructor({point = EMPTY_FORM_POINT}) {
+    this.point = point;
+  }
+
   getTemplate() {
-    return createEventEditingFormTemplate();
+    return createEventEditingFormTemplate(this.point);
   }
 
   getElement() {

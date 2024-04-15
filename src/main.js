@@ -1,16 +1,21 @@
-import ListFilterView from './view/list-filter-view.js';
-import ListSortView from './view/list-sort-view.js';
-import EventEditingFormView from './view/event-editing-form.js';
-import RoutePointView from './view/route-point.js';
-import { render } from './render.js';
+import Presenter from './presenter/presenter.js';
+import RoutePointsModelModel from './model/route-points-model.js';
+import MockService from './service/service.js';
+import DestinationsModel from './model/destinations-model.js';
+import OffersModel from './model/offers-model.js';
 
-const listFilterContainer = document.querySelector('.trip-controls__filters');
-const eventsContainer = document.querySelector('.trip-events');
+const pageBodyContainer = document.querySelector('.page-body');
 
+const service = new MockService();
+const destinationsModel = new DestinationsModel({service});
+const offersModel = new OffersModel({service});
+const routePointsModel = new RoutePointsModelModel({service});
 
-render(new ListFilterView(), listFilterContainer);
-render(new ListSortView(), eventsContainer);
-render(new EventEditingFormView(), eventsContainer);
-render(new RoutePointView(), eventsContainer);
-render(new RoutePointView(), eventsContainer);
-render(new RoutePointView(), eventsContainer);
+const presenter = new Presenter({
+  pageBodyContainer,
+  destinationsModel,
+  offersModel,
+  routePointsModel
+});
+
+presenter.init();
