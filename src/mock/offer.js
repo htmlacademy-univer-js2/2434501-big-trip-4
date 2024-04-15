@@ -1,5 +1,5 @@
-import { PRICES } from '../const';
-import { getRandomArrayElement } from '../utils';
+import { PRICES } from '../const.js';
+import { getRandomArrayElement } from '../utils.js';
 
 function generateOffer(routePointType) {
   return {

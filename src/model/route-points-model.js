@@ -3,7 +3,7 @@
 // const ROUTE_POINTS_COUNT = 3;
 
 export default class RoutePointsModel {
-  constructor(service) {
+  constructor({service}) {
     this.service = service;
     this.points = this.service.getPoints();
   }

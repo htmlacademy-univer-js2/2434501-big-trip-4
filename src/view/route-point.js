@@ -1,16 +1,18 @@
-import { createElement } from '../render';
-import { formatStringToDateTime, formatStringToShortDate, formatStringToTime, getDuration, getFavoriteTemplate } from '../utils';
+import { createElement } from '../render.js';
+import { formatStringToDateTime, formatStringToShortDate, formatStringToTime, getDuration, getFavoriteTemplate } from '../utils.js';
 
-function createRoutePointTemplate(routePoint) {
+function createRoutePointTemplate({point, pointDestination, pointOffers}) {
   const {
     basePrice,
     dateFrom,
     dateTo,
-    destination,
-    offers,
+    // destination,
+    // offers,
     isFavorite,
     type
-  } = routePoint;
+  } = point;
+
+  const {name} = pointDestination;
 
   return `<li class="trip-events__item">
   <div class="event">
@@ -18,7 +20,7 @@ function createRoutePointTemplate(routePoint) {
     <div class="event__type">
       <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
     </div>
-    <h3 class="event__title">${type} ${destination}</h3>
+    <h3 class="event__title">${type} ${name}</h3>
 
     <div class="event__schedule">
       <p class="event__time">
@@ -37,9 +39,9 @@ function createRoutePointTemplate(routePoint) {
 
     <ul class="event__selected-offers">
       <li class="event__offer">
-        <span class="event__offer-title">${offers.title}</span>
+        <span class="event__offer-title">${pointOffers[0].title}</span>
         &plus;&euro;&nbsp;
-        <span class="event__offer-price">${offers.price}</span>
+        <span class="event__offer-price">${pointOffers[0].price}</span>
       </li>
     </ul>
 
@@ -59,17 +61,17 @@ function createRoutePointTemplate(routePoint) {
 }
 
 export default class RoutePointView {
-  constructor({routePoint, pointDestination, pointOffers}) {
-    this.routePoint = routePoint;
+  constructor({point, pointDestination, pointOffers}) {
+    this.point = point;
     this.pointDestination = pointDestination;
     this.pointOffers = pointOffers;
   }
 
   getTemplate() {
     return createRoutePointTemplate({
-      point: this.routePoint,
-      destination: this.pointDestination,
-      offers: this.pointOffers
+      point: this.point,
+      pointDestination: this.pointDestination,
+      pointOffers: this.pointOffers
     });
   }
 

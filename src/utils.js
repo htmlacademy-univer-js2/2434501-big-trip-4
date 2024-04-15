@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { INTEGERS } from './const';
+import { INTEGERS } from './const.js';
 
 function getRandomArrayElement(items) {
   return items[Math.floor(Math.random() * items.length)];

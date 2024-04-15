@@ -6,13 +6,13 @@ import OffersModel from './model/offers-model.js';
 
 const pageBodyContainer = document.querySelector('.page-body');
 
-const mockService = new MockService();
-const destinationsModel = new DestinationsModel(mockService);
-const offersModel = new OffersModel(mockService);
-const routePointsModel = new RoutePointsModelModel(mockService);
+const service = new MockService();
+const destinationsModel = new DestinationsModel({service});
+const offersModel = new OffersModel({service});
+const routePointsModel = new RoutePointsModelModel({service});
 
 const presenter = new Presenter({
-  pageBodyContainer: pageBodyContainer,
+  pageBodyContainer,
   destinationsModel,
   offersModel,
   routePointsModel

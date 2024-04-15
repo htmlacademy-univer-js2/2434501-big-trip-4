@@ -3,12 +3,12 @@ import ListSortView from '../view/list-sort-view.js';
 import EventEditingFormView from '../view/event-editing-form.js';
 import RoutePointView from '../view/route-point.js';
 import { render } from '../render.js';
-import DestinationsModel from '../model/destinations-model.js';
+
 
 export default class Presenter {
 
   constructor({pageBodyContainer,
-    destinationModel,
+    destinationsModel,
     offersModel,
     routePointsModel
   }) {
@@ -16,23 +16,26 @@ export default class Presenter {
     this.listFilterContainer = this.pageBodyContainer.querySelector('.trip-controls__filters');
     this.eventsListContainer = this.pageBodyContainer.querySelector('.trip-events');
 
-    this.destinationModel = destinationModel;
+    this.destinationsModel = destinationsModel;
     this.offersModel = offersModel;
     this.routePointsModel = routePointsModel;
   }
 
   init() {
-    this.routePoints = [...this.routePointsModel.get()];
-
+    this.routePoints = this.routePointsModel.get();
+    // console.log(this.routePoints);
     render(new ListFilterView, this.listFilterContainer);
 
     render(new ListSortView, this.eventsListContainer);
     render(new EventEditingFormView, this.eventsListContainer);
     this.routePoints.forEach((point) => {
+      // console.log(point);
+      // console.log(this.destinationsModel.getById(point.destination));
+      // console.log(this.offersModel.getByType(point.type));
       render(
         new RoutePointView({
           point,
-          pointDestination: new DestinationsModel().getById(),
+          pointDestination: this.destinationsModel.getById(point.destination),
           pointOffers: this.offersModel.getByType(point.type)
         }),
         this.eventsListContainer

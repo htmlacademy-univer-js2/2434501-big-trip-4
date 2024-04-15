@@ -1,8 +1,8 @@
-import { BOOLEANS, DESTINATIONS_COUNT, OFFERS_COUNT, POINTS_COUNT, ROUTE_POINT_TYPES } from '../const';
-import { generateDestination } from '../mock/destination';
-import { generateOffer } from '../mock/offer';
-import { generateRoutePoint } from '../mock/route-point';
-import { getRandomArrayElement } from '../utils';
+import { BOOLEANS, DESTINATIONS_COUNT, OFFERS_COUNT, POINTS_COUNT, ROUTE_POINT_TYPES } from '../const.js';
+import { generateDestination } from '../mock/destination.js';
+import { generateOffer } from '../mock/offer.js';
+import { generateRoutePoint } from '../mock/route-point.js';
+import { getRandomArrayElement } from '../utils.js';
 
 export default class MockService {
   destinations = [];
@@ -38,7 +38,7 @@ export default class MockService {
     return ROUTE_POINT_TYPES.map((type) => ({
       type,
       // добавить рандомное количество офферов
-      offers: Array.from({length: OFFERS_COUNT}, () => generateOffer())
+      offers: Array.from({length: OFFERS_COUNT}, () => generateOffer(type))
     }));
   }
 

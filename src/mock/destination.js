@@ -1,5 +1,5 @@
-import { CITIES, DESCRIPTIONS } from '../const';
-import { getRandomArrayElement } from '../utils';
+import { CITIES, DESCRIPTIONS } from '../const.js';
+import { getRandomArrayElement } from '../utils.js';
 
 function generateDestination() {
   const city = getRandomArrayElement(CITIES);

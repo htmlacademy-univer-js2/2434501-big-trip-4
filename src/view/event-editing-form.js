@@ -1,4 +1,4 @@
-import { createElement } from '../render';
+import { createElement } from '../render.js';
 
 function createEventEditingFormTemplate() {
   return `<li class="trip-events__item">

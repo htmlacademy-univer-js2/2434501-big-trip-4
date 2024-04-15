@@ -1,5 +1,5 @@
-import { generateDate, getRandomArrayElement } from '../utils';
-import { PRICES, BOOLEANS } from '../const';
+import { generateDate, getRandomArrayElement } from '../utils.js';
+import { PRICES, BOOLEANS } from '../const.js';
 // import { generateDestination } from './destination';
 // import { generateOffer } from './offer';
 
