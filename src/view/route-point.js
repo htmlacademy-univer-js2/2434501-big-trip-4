@@ -1,5 +1,5 @@
 import { createElement } from '../render';
-import { formatStringToDateTime, formatStringToShortDate, formatStringToTime, getDuration } from '../utils';
+import { formatStringToDateTime, formatStringToShortDate, formatStringToTime, getDuration, getFavoriteTemplate } from '../utils';
 
 function createRoutePointTemplate(routePoint) {
   const {
@@ -8,7 +8,7 @@ function createRoutePointTemplate(routePoint) {
     dateTo,
     destination,
     offers,
-    // isFavorite,
+    isFavorite,
     type
   } = routePoint;
 
@@ -18,7 +18,7 @@ function createRoutePointTemplate(routePoint) {
     <div class="event__type">
       <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
     </div>
-    <h3 class="event__title">${type} ${destination.name}</h3>
+    <h3 class="event__title">${type} ${destination}</h3>
 
     <div class="event__schedule">
       <p class="event__time">
@@ -43,7 +43,8 @@ function createRoutePointTemplate(routePoint) {
       </li>
     </ul>
 
-    <button class="event__favorite-btn" type="button">
+
+    <button class="event__favorite-btn ${getFavoriteTemplate(isFavorite)}" type="button">
       <span class="visually-hidden">Add to favorite</span>
       <svg class="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
         <path d="M14 21l-8.22899 4.3262 1.57159-9.1631L.685209 9.67376 9.8855 8.33688 14 0l4.1145 8.33688 9.2003 1.33688-6.6574 6.48934 1.5716 9.1631L14 21z"/>
@@ -58,12 +59,18 @@ function createRoutePointTemplate(routePoint) {
 }
 
 export default class RoutePointView {
-  constructor({routePoint}) {
+  constructor({routePoint, pointDestination, pointOffers}) {
     this.routePoint = routePoint;
+    this.pointDestination = pointDestination;
+    this.pointOffers = pointOffers;
   }
 
   getTemplate() {
-    return createRoutePointTemplate(this.routePoint);
+    return createRoutePointTemplate({
+      point: this.routePoint,
+      destination: this.pointDestination,
+      offers: this.pointOffers
+    });
   }
 
   getElement() {

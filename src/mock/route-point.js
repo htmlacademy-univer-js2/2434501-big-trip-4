@@ -1,18 +1,18 @@
 import { generateDate, getRandomArrayElement } from '../utils';
-import { ROUTE_POINT_TYPES, PRICES, BOOLEANS } from '../const';
-import { generateDestination } from './destination';
-import { generateOffer } from './offer';
+import { PRICES, BOOLEANS } from '../const';
+// import { generateDestination } from './destination';
+// import { generateOffer } from './offer';
 
-function generateRoutePoint() {
+function generateRoutePoint(routePointType, destinationId, offerIds) {
   return {
     id: crypto.randomUUID(),
     basePrice: getRandomArrayElement(PRICES),
     dateFrom: generateDate({start: true}),
     dateTo: generateDate({start: false}),
-    destination: generateDestination(),
+    destination: destinationId,
     isFavorite: getRandomArrayElement(BOOLEANS),
-    offers: generateOffer(this.type),
-    type: getRandomArrayElement(ROUTE_POINT_TYPES)
+    offers: offerIds,
+    type: routePointType
   };
 }
 
