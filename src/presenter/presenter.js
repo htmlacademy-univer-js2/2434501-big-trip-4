@@ -23,15 +23,14 @@ export default class Presenter {
 
   init() {
     this.routePoints = this.routePointsModel.get();
-    // console.log(this.routePoints);
+
     render(new ListFilterView, this.listFilterContainer);
 
     render(new ListSortView, this.eventsListContainer);
-    render(new EventEditingFormView, this.eventsListContainer);
+    render(new EventEditingFormView({
+
+    }), this.eventsListContainer);
     this.routePoints.forEach((point) => {
-      // console.log(point);
-      // console.log(this.destinationsModel.getById(point.destination));
-      // console.log(this.offersModel.getByType(point.type));
       render(
         new RoutePointView({
           point,
@@ -41,12 +40,5 @@ export default class Presenter {
         this.eventsListContainer
       );
     });
-    // for (let i = 0; i < this.routePoints.length; i++) {
-    //   render(new RoutePointView({
-    //     routePoint: this.routePoints[i],
-    //     pointDestination: this.destinationModel.getById(this.routePoint.pointDestination),
-    //     pointOffers: this.offersModel.getByType(routePoint.type)
-    //   }), this.eventsListContainer);
-    // }
   }
 }
